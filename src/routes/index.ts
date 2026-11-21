@@ -2,6 +2,7 @@ import { Router } from "express";
 import { getDb } from "../config/db.js";
 import { userRouter } from "./user.routes.js";
 import { uploadRouter } from "./upload.routes.js";
+import { vendorRouter } from "./vendor.routes.js";
 
 export const router = Router();
 
@@ -17,3 +18,4 @@ router.get("/health", async (_req, res) => {
 
 router.use("/me", userRouter);
 router.use("/uploads", uploadRouter);
+router.use("/vendor", vendorRouter);
