@@ -12,5 +12,5 @@
     "resolveJsonModule": true,
     "sourceMap": true
   },
-  "include": ["src", "api"]
+  "include": ["src"]
 }
