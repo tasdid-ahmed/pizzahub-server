@@ -7,6 +7,7 @@ const schema = z.object({
   MONGODB_URI: z.string().min(1),
   MONGODB_DB: z.string().min(1),
   CLIENT_URL: z.url().transform((url) => url.replace(/\/+$/, "")),
+  IMGBB_API_KEY: z.string().min(1).optional(),
 });
 
 const parsed = schema.safeParse(process.env);

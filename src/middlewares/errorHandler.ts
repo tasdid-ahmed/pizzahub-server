@@ -1,6 +1,7 @@
 import type { ErrorRequestHandler, RequestHandler } from "express";
 import { ZodError, z } from "zod";
 import { ApiError } from "../utils/ApiError.js";
+import multer from "multer";
 
 export const notFound: RequestHandler = (req, _res, next) => {
   next(new ApiError(404, `Route not found: ${req.method} ${req.originalUrl}`, "NOT_FOUND"));
@@ -15,6 +16,12 @@ export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
       message: "Validation failed",
       code: "VALIDATION_ERROR",
       details: z.flattenError(err).fieldErrors,
+    });
+  } else if (err instanceof multer.MulterError) {
+    res.status(400).json({
+      success: false,
+      message: err.code === "LIMIT_FILE_SIZE" ? "Image must be 2 MB or smaller" : "Invalid upload",
+      code: "UPLOAD_ERROR",
     });
   } else if (err?.type === "entity.parse.failed") {
     res.status(400).json({ success: false, message: "Invalid JSON body", code: "INVALID_JSON" });
