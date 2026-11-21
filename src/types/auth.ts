@@ -10,3 +10,11 @@ export interface AuthUser {
   plan: "free" | "premium";
   subscriptionExpiresAt: Date | null;
 }
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: AuthUser;
+    }
+  }
+}

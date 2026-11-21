@@ -5,6 +5,7 @@ import { env } from "../config/env.js";
 import { getDb } from "../config/db.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ROLES, type Role } from "../utils/constants.js";
+import type { AuthUser } from "../types/auth.js";
 
 const jwks = createRemoteJWKSet(new URL(`${env.CLIENT_URL}/api/auth/jwks`));
 
@@ -40,7 +41,7 @@ export const verifyToken: RequestHandler = async (req, _res, next) => {
   const expiresAt = doc.subscriptionExpiresAt ? new Date(doc.subscriptionExpiresAt) : null;
   const isPremium = doc.subscriptionPlan === "premium" && expiresAt !== null && expiresAt > new Date();
 
-  req.user = {
+  const user: AuthUser = {
     id: doc._id.toString(),
     objectId: doc._id,
     name: String(doc.name ?? ""),
@@ -49,5 +50,6 @@ export const verifyToken: RequestHandler = async (req, _res, next) => {
     plan: isPremium ? "premium" : "free",
     subscriptionExpiresAt: expiresAt,
   };
+  req.user = user;
   next();
 };
