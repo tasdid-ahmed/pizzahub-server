@@ -8,6 +8,8 @@ const schema = z.object({
   MONGODB_DB: z.string().min(1),
   CLIENT_URL: z.url().transform((url) => url.replace(/\/+$/, "")),
   IMGBB_API_KEY: z.string().min(1).optional(),
+  STRIPE_SECRET_KEY: z.string().min(1).optional(),
+  STRIPE_WEBHOOK_SECRET: z.string().min(1).optional(),
 });
 
 const parsed = schema.safeParse(process.env);
