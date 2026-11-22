@@ -4,6 +4,7 @@ import { userRouter } from "./user.routes.js";
 import { uploadRouter } from "./upload.routes.js";
 import { vendorRouter } from "./vendor.routes.js";
 import { menuRouter } from "./menu.routes.js";
+import { adminRouter } from "./admin.routes.js";
 
 export const router = Router();
 
@@ -21,3 +22,4 @@ router.use("/me", userRouter);
 router.use("/uploads", uploadRouter);
 router.use("/vendor", vendorRouter);
 router.use("/menu-items", menuRouter);
+router.use("/admin", adminRouter);
