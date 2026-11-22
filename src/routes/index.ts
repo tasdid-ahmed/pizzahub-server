@@ -5,6 +5,7 @@ import { uploadRouter } from "./upload.routes.js";
 import { vendorRouter } from "./vendor.routes.js";
 import { menuRouter } from "./menu.routes.js";
 import { adminRouter } from "./admin.routes.js";
+import { customerRouter, orderRouter } from "./order.routes.js";
 
 export const router = Router();
 
@@ -23,3 +24,5 @@ router.use("/uploads", uploadRouter);
 router.use("/vendor", vendorRouter);
 router.use("/menu-items", menuRouter);
 router.use("/admin", adminRouter);
+router.use("/orders", orderRouter);
+router.use("/customer", customerRouter);
