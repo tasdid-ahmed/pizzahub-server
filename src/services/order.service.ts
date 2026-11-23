@@ -215,6 +215,8 @@ export async function getVendorOverview(user: AuthUser) {
     activeMenuItems,
     pendingOrders: counts.pending ?? 0,
     acceptedOrders: counts.accepted ?? 0,
+    rejectedOrders: counts.rejected ?? 0,
+    cancelledOrders: counts.cancelled ?? 0,
     plan: user.plan,
     subscriptionExpiresAt: user.subscriptionExpiresAt,
   };
